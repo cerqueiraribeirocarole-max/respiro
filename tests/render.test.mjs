@@ -9,7 +9,7 @@ test('flor de ritmo inicia pausada com controle explícito',()=>{const html=rend
 
 await build({entryPoints:['src/Activities.tsx'],outfile:'node_modules/.cache/respiro-activities.mjs',bundle:true,platform:'node',format:'esm',packages:'external',jsx:'automatic'});
 const {WellnessHub,PaintStudio,RespiroChat}=await import('../node_modules/.cache/respiro-activities.mjs');
-test('ateliê renderiza desenho, pintura e todas as sequências',()=>{const html=renderToStaticMarkup(React.createElement(WellnessHub,{onBack(){}}));for(const text of ['Desenhe com o dedo','Pinte uma mandala','Criar e desacelerar','Voltar para o agora','Uma pausa sensorial'])assert.ok(html.includes(text));});
+test('ateliê renderiza desenho, pintura e todas as sequências',()=>{const html=renderToStaticMarkup(React.createElement(WellnessHub,{onBack(){}}));for(const text of ['Caminhos na areia','Mosaico em flor','Jardim de luzes','Desenhe com o dedo','Pinte uma mandala','Criar e desacelerar','Voltar para o agora','Uma pausa sensorial'])assert.ok(html.includes(text));});
 test('mandala tem áreas acessíveis para pintar pelo teclado',()=>{const html=renderToStaticMarkup(React.createElement(PaintStudio));assert.equal((html.match(/role="button"/g)||[]).length,25);assert.ok(html.includes('Exportar mandala'));});
 test('conversa declara explicitamente IA e uso do provedor',()=>{const html=renderToStaticMarkup(React.createElement(RespiroChat));assert.ok(html.includes('não com uma pessoa ou terapeuta'));assert.ok(html.includes('provedor de IA'));assert.ok(html.includes('disabled'));});
 await build({entryPoints:['src/Auth.tsx'],outfile:'node_modules/.cache/respiro-auth-render.mjs',bundle:true,platform:'node',format:'esm',packages:'external',jsx:'automatic'});
