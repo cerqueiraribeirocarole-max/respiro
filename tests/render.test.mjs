@@ -17,3 +17,5 @@ globalThis.location={pathname:'/cadastro',search:'',hash:'',origin:'https://resp
 const{AuthPage,AccountPage}=await import('../node_modules/.cache/respiro-auth-render.mjs');
 test('cadastro renderiza campos reais e controle de visibilidade da senha',()=>{const html=renderToStaticMarkup(React.createElement(AuthPage));assert.ok(html.includes('signup-name'));assert.ok(html.includes('type="email"'));assert.equal((html.match(/Mostrar senha/g)||[]).length,2);assert.ok(html.includes('Criar minha conta'));});
 test('conta inicia verificando autenticação, sem liberar dados',()=>{const html=renderToStaticMarkup(React.createElement(AccountPage));assert.ok(html.includes('Consultando sua conta'));assert.ok(!html.includes('Salvar progresso nesta conta'));});
+
+test('reenviar confirmação pede somente e-mail e não senha',()=>{location.pathname='/reenviar-confirmacao';const html=renderToStaticMarkup(React.createElement(AuthPage));assert.ok(html.includes('Enviar nova confirmação'));assert.ok(html.includes('type="email"'));assert.ok(!html.includes('type="password"'));});
