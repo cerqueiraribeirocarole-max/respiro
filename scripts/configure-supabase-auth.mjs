@@ -1,0 +1,6 @@
+import{readFile}from'node:fs/promises';
+const project='xucgakskflfqfwgldqqe';const token=process.env.SUPABASE_ACCESS_TOKEN;const site=process.env.RESPIRO_SITE_URL;
+if(!token||!site)throw Error('Defina SUPABASE_ACCESS_TOKEN e RESPIRO_SITE_URL em ambiente seguro. Não coloque segredos em comandos ou no repositório.');
+const url=new URL(site);if(url.protocol!=='https:'||url.pathname!=='/'||url.search||url.hash||url.username||url.password)throw Error('RESPIRO_SITE_URL deve ser uma origem HTTPS, sem caminho.');
+const body={site_url:url.origin,uri_allow_list:[url.origin+'/auth/confirm',url.origin+'/auth/confirm?next=*',url.origin+'/nova-senha',url.origin+'/auth/callback'].join(','),mailer_subjects_confirmation:'Seu refúgio está quase pronto · RESPIRO',mailer_subjects_recovery:'Vamos recuperar seu acesso · RESPIRO',mailer_templates_confirmation_content:await readFile('supabase/templates/confirmation.html','utf8'),mailer_templates_recovery_content:await readFile('supabase/templates/recovery.html','utf8')};
+const response=await fetch('https://api.supabase.com/v1/projects/'+project+'/config/auth',{method:'PATCH',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});if(!response.ok)throw Error('Configuração não aplicada. HTTP '+response.status);console.log('URLs e modelos de e-mail atualizados. SMTP não foi alterado.');
