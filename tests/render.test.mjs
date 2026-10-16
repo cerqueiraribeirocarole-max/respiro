@@ -9,7 +9,7 @@ test('flor de ritmo inicia pausada com controle explícito',()=>{const html=rend
 
 await build({entryPoints:['src/Activities.tsx'],outfile:'node_modules/.cache/respiro-activities.mjs',bundle:true,platform:'node',format:'esm',packages:'external',jsx:'automatic'});
 const {WellnessHub,PaintStudio,RespiroChat}=await import('../node_modules/.cache/respiro-activities.mjs');
-test('ateliê renderiza desenho, pintura e todas as sequências',()=>{const html=renderToStaticMarkup(React.createElement(WellnessHub,{onBack(){}}));for(const text of ['Caminhos na areia','Mosaico em flor','Jardim de luzes','Desenhe com o dedo','Pinte uma mandala','Criar e desacelerar','Voltar para o agora','Uma pausa sensorial'])assert.ok(html.includes(text));});
+test('ateliê renderiza desenho, pintura e todas as sequências',()=>{const html=renderToStaticMarkup(React.createElement(WellnessHub,{onBack(){}}));for(const text of ['Meu gatinho','Cores que fluem','Combinação secreta','Torre de bolhas','Caminhos na areia','Mosaico em flor','Jardim de luzes','Desenhe com o dedo','Pinte uma mandala','Criar e desacelerar','Voltar para o agora','Uma pausa sensorial'])assert.ok(html.includes(text));});
 test('mandala tem áreas acessíveis para pintar pelo teclado',()=>{const html=renderToStaticMarkup(React.createElement(PaintStudio));assert.equal((html.match(/role="button"/g)||[]).length,25);assert.ok(html.includes('Exportar mandala'));});
 test('conversa declara explicitamente IA e uso do provedor',()=>{const html=renderToStaticMarkup(React.createElement(RespiroChat));assert.ok(html.includes('não com uma pessoa ou terapeuta'));assert.ok(html.includes('provedor de IA'));assert.ok(html.includes('disabled'));});
 await build({entryPoints:['src/Auth.tsx'],outfile:'node_modules/.cache/respiro-auth-render.mjs',bundle:true,platform:'node',format:'esm',packages:'external',jsx:'automatic'});
@@ -19,3 +19,8 @@ test('cadastro renderiza campos reais e controle de visibilidade da senha',()=>{
 test('conta inicia verificando autenticação, sem liberar dados',()=>{const html=renderToStaticMarkup(React.createElement(AccountPage));assert.ok(html.includes('Consultando sua conta'));assert.ok(!html.includes('Salvar progresso nesta conta'));});
 
 test('reenviar confirmação pede somente e-mail e não senha',()=>{location.pathname='/reenviar-confirmacao';const html=renderToStaticMarkup(React.createElement(AuthPage));assert.ok(html.includes('Enviar nova confirmação'));assert.ok(html.includes('type="email"'));assert.ok(!html.includes('type="password"'));});
+
+await build({entryPoints:['src/CozyGames.tsx'],outfile:'node_modules/.cache/respiro-cozy.mjs',bundle:true,platform:'node',format:'esm',packages:'external',jsx:'automatic'});
+const {CozyCat,WaterSort,SecretBottles,BubbleTower}=await import('../node_modules/.cache/respiro-cozy.mjs');
+test('gatinho tem cuidados reais e informa salvamento local',()=>{const html=renderToStaticMarkup(React.createElement(CozyCat));for(const v of ['Alimentar','Dar carinho','Brincar','Salvar nome','ainda não sincroniza'])assert.ok(html.includes(v));});
+test('puzzles apresentam controles de toque acessíveis',()=>{assert.ok(renderToStaticMarkup(React.createElement(WaterSort)).includes('Garrafa 1'));assert.ok(renderToStaticMarkup(React.createElement(SecretBottles)).includes('Conferir combinação'));assert.ok(renderToStaticMarkup(React.createElement(BubbleTower)).includes('Girar andar 1 para esquerda'));});

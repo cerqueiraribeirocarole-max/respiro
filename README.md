@@ -60,3 +60,11 @@ O script `scripts/configure-supabase-auth.mjs` permite aplicar URLs e modelos co
 O repositório público não inclui a identidade da hospedagem Sites. Vercel usa build Vite e as rotas de API em `/api`; o pacote Worker continua disponível para a hospedagem original. Acesso direto ao projeto Vercel via conector encontrou erro 403 no escopo da equipe; o deploy via conexão Git depende da configuração já feita pelo proprietário.
 
 Verificações desta integração: compilação TypeScript/Vite/Worker; testes de rotas seguras, senha, mensagens de erro e renderização de cadastro; consultas reais ao banco confirmaram RLS nas duas tabelas, oito políticas, zero concessões ao papel anônimo e apenas SELECT/INSERT/UPDATE/DELETE para authenticated. Não foi executado cadastro com envio real nem o clique de confirmação em uma caixa de e-mail.
+
+### Companheiro e puzzles coloridos
+
+`/gatinho` abre Nuvem, um gato virtual com nome editável, alimentação, carinho e brincadeiras. Cada ação rende um coração uma vez por dia de São Paulo; crescimento em 3, 7 e 14 dias diferentes de cuidado. Não há perda por ausência. O estado é salvo somente no localStorage (`respiro-pet-v1`), sem sincronização de conta nesta versão.
+
+O Ateliê inclui Cores que fluem (despejo de líquidos, seis configurações com 2–4 cores e desfazer), Combinação secreta (seis códigos, troca de posições, feedback e dicas) e Torre de bolhas (seis torres com 3–8 andares giratórios). O índice da fase fica salvo; movimentos da fase atual reiniciam ao recarregar. Todos funcionam sem rede após carregados.
+
+Testes de regras verificam a resolução dos líquidos com busca de estados, capacidade e cor de destino; alinhamento das torres; códigos; cuidados únicos por dia; ausência sem penalidade; crescimento; validação do salvamento. Os testes de crescimento usam datas controladas e não substituem um acompanhamento real de 14 dias.
